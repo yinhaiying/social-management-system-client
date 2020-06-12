@@ -1,34 +1,34 @@
 import React, { Component } from "react";
-
+import {Link} from 'react-router-dom';
 class NavBar extends Component {
   render() {
     return (
       <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-          <a className="navbar-brand" href="#">
+          <Link className="navbar-brand" to="/">
             海因斯坦
-          </a>
+          </Link>
           <div className="collapse navbar-collapse" id="navbarColor02">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item active">
-                <a className="nav-link" href="#">
+                <Link className="nav-link" to="#">
                   Home
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <Link className="nav-link" to="#">
                   Features
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
           <div style={{ float: "right" }}>
-            <a className="navbar-brand" href="">
+            <Link className="navbar-brand" to="/register">
               注册
-            </a>
-            <a className="navbar-brand" href="">
+            </Link>
+            <Link className="navbar-brand" to="/login">
               登录
-            </a>
+            </Link>
           </div>
         </nav>
       </div>

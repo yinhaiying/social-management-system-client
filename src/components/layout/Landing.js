@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import { Link } from "react-router-dom";
  class Landing extends Component {
     render() {
         return (
@@ -12,12 +12,12 @@ import React, { Component } from 'react'
                       <h1 className="display-3 mb-4">开发者</h1>
                       <p className="lead">更多内容</p>
                       <hr />
-                      <a href="register.html" className="btn btn-lg btn-info mr-2">
+                      <Link to="/register" className="btn btn-lg btn-info mr-2">
                         注册
-                      </a>
-                      <a href="login.html" className="btn btn-lg btn-light">
+                      </Link>
+                      <Link to="/login" className="btn btn-lg btn-light">
                         登录
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
