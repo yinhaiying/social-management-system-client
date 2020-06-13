@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import User from '../../service/users.js';
+import classNames from 'classnames'
 const user = new User();
 class Register extends Component {
   constructor() {
@@ -17,13 +18,51 @@ class Register extends Component {
       [e.target.name]: e.target.value,
     });
   };
-  onSubmit = async (e) => {
+  onSubmit =  (e) => {
     e.preventDefault();
     const { username, email, password } = this.state;
-    const newUser = await user.register({ username, email, password });
-    console.log(newUser);
+    if(!username){
+      this.setState({
+        errors:{
+          username:'用户名不能为空'
+        }
+      });
+      return;
+    }
+    if(!email){
+      this.setState({
+        errors:{
+          email:'邮箱不能为空'
+        }
+      });
+      return;
+    }
+    if(!password){
+      this.setState({
+        errors:{
+          password:'密码不能为空'
+        }
+      });
+      return;
+    }
+    
+    const res = user.register({ username, email, password })
+        .then((res) => {
+          if(res.data.code === 0){
+            alert('注册成功')
+          }else{
+            this.setState({
+              errors:{
+                msg:res.data.msg
+              }
+            })
+          }
+        })
   };
   render() {
+    console.log(this.state)
+    const {errors} = this.state;
+    console.log(errors)
     return (
       <div className="register">
         <div className="container">
@@ -37,37 +76,47 @@ class Register extends Component {
                 <div className="form-group">
                   <input
                     type="text"
-                    className="form-control form-control-lg"
+                    className={classNames("form-control", "form-control-lg", {
+                      "is-invalid": errors.username,
+                    })}
                     placeholder="Name"
                     name="username"
                     value={this.state.username}
                     onChange={this.onChange}
-                    required
                   />
+                  {errors.username && (
+                    <div className="invalid-feedback">{errors.username}</div>
+                  )}
                 </div>
                 <div className="form-group">
                   <input
                     type="email"
-                    className="form-control form-control-lg"
+                    className={classNames("form-control", "form-control-lg", {
+                      "is-invalid": errors.email,
+                    })}
                     placeholder="Email Address"
                     name="email"
                     value={this.state.email}
                     onChange={this.onChange}
                   />
-                  <small className="form-text text-muted">
-                    This site uses Gravatar so if you want a profile image, use
-                    a Gravatar email
-                  </small>
+                  {errors.email && (
+                    <div className="invalid-feedback">{errors.email}</div>
+                  )}
                 </div>
                 <div className="form-group">
                   <input
                     type="password"
-                    className="form-control form-control-lg"
+                    className={classNames("form-control", "form-control-lg", {
+                      "is-invalid": errors.password,
+                    })}
                     placeholder="Password"
                     name="password"
                     value={this.state.password}
                     onChange={this.onChange}
                   />
+                  {errors.password && (
+                    <div className="invalid-feedback">{errors.password}</div>
+                  )}
                 </div>
 
                 <input type="submit" className="btn btn-info btn-block mt-4" />
