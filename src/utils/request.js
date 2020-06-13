@@ -1,6 +1,6 @@
 import axios from 'axios'
 const service = axios.create({
-  baseURL: "https://social-system-server.herokuapp.com",
+  baseURL: "",
   timeout:5000
 });
 

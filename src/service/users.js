@@ -3,7 +3,7 @@ import request from '../utils/request.js';
 class User {
     register(params){
         return request({
-              url: "/users/register",
+              url: "/api/users/register",
               method: "post",
               data: params
             });
